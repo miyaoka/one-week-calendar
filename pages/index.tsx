@@ -1,8 +1,13 @@
 import Head from 'next/head'
 import { useCalendar } from '../lib/useCalendar'
+import { useRouter } from 'next/router'
 
 export default function Home() {
   const dateList = useCalendar()
+  const { font } = useRouter().query
+  const fontFamily =
+    font == null ? 'Roboto' : Array.isArray(font) ? font[0] : font
+  const escapedFontFamily = fontFamily.replace(/\s/g, '+')
 
   return (
     <>
@@ -10,25 +15,21 @@ export default function Home() {
         <title>One Week Calendar</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+          href={`https://fonts.googleapis.com/css2?family=${escapedFontFamily}&display=swap`}
           rel="stylesheet"
         />
       </Head>
 
-      <div className="container">
+      <div className="container" style={{ fontFamily: `'${fontFamily}'` }}>
         <div className="week">
           {dateList.map(({ day, mDate, isToday }) => (
-            <div className="date">
+            <div className="date" key={mDate}>
               <div className="day">{day}</div>
               <div className="mDate">
                 <span className={isToday ? 'isToday' : ''}>{mDate}</span>
               </div>
-              {/* {isToday ? <div className="today" /> : ''} */}
             </div>
           ))}
         </div>
@@ -36,7 +37,6 @@ export default function Home() {
 
       <style jsx>{`
         .container {
-          font-family: 'Roboto', sans-serif;
           display: flex;
           height: 100vh;
           align-items: center;
