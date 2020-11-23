@@ -2,11 +2,7 @@ import Head from 'next/head'
 import { useCalendar } from '../lib/useCalendar'
 
 export default function Home() {
-  const calendar = useCalendar()
-
-  const dayList = calendar.map(({ day }) => day)
-  const mDateList = calendar.map(({ mDate }) => mDate)
-  const isTodayList = calendar.map(({ isToday }) => isToday)
+  const dateList = useCalendar()
 
   return (
     <>
@@ -25,23 +21,17 @@ export default function Home() {
       </Head>
 
       <div className="container">
-        <table className="week">
-          <tr className="day">
-            {dayList.map((day) => (
-              <td>{day}</td>
-            ))}
-          </tr>
-          <tr className="mDate">
-            {mDateList.map((mDate) => (
-              <td>{mDate}</td>
-            ))}
-          </tr>
-          <tr className="isToday">
-            {isTodayList.map((isToday) => (
-              <td className={isToday ? 'today' : ''}></td>
-            ))}
-          </tr>
-        </table>
+        <div className="week">
+          {dateList.map(({ day, mDate, isToday }) => (
+            <div className="date">
+              <div className="day">{day}</div>
+              <div className="mDate">
+                <span className={isToday ? 'isToday' : ''}>{mDate}</span>
+              </div>
+              {/* {isToday ? <div className="today" /> : ''} */}
+            </div>
+          ))}
+        </div>
       </div>
 
       <style jsx>{`
@@ -53,29 +43,43 @@ export default function Home() {
         }
         .week {
           width: 100%;
+          display: flex;
+        }
+        .date {
+          flex: 1;
+          position: relative;
+        }
+        .date > div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
         .day {
-          height: 50px;
-        }
-        .mDate {
-          height: 100px;
-        }
-        .isToday {
-          height: 5px;
-        }
-        td {
-          text-align: center;
-        }
-        .day td {
           font-size: 20px;
           font-weight: 700;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          transform: translateY(-100%);
         }
-        .mDate td {
+        .mDate > span {
           font-size: 50px;
           font-weight: 700;
+          padding: 10px 0;
         }
-        .today {
+        .isToday {
+          position: relative;
+        }
+        .isToday::before {
+          content: '';
+          height: 4px;
           background: #999;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          transform: translateY(100%);
         }
       `}</style>
 

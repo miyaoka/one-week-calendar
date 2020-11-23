@@ -5,7 +5,7 @@ const oneMinute = 60 * 1000
 const dayLabel = 'SMTWTFS'.split('')
 
 export function useCalendar() {
-  const [currentTime, setCurrentTime] = useState(Date.now())
+  const [currentTime, setCurrentTime] = useState(Date.now() + oneDay * 0)
 
   useEffect(() => {
     const timerHandle = setTimeout(() => setCurrentTime(Date.now()), oneMinute)
