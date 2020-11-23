@@ -13,6 +13,7 @@ export default function Home() {
       <Head>
         <title>One Week Calendar</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.json" />
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
           rel="stylesheet"

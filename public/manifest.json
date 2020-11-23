@@ -1,0 +1,15 @@
+{
+  "name": "one-week-calendar",
+  "short_name": "1WeekCal",
+  "icons": [
+    {
+      "src": "images/calendar.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display": "fullscreen",
+  "theme_color": "#000",
+  "background_color": "#000"
+}
