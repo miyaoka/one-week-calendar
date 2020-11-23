@@ -46,8 +46,6 @@ export default function Home() {
 
       <style jsx>{`
         .container {
-          background: #000;
-          color: #ccc;
           font-family: 'Roboto', sans-serif;
           display: flex;
           height: 100vh;
@@ -87,6 +85,10 @@ export default function Home() {
           padding: 0;
           margin: 0;
           overflow: hidden;
+        }
+        body {
+          background: #000;
+          color: #ccc;
         }
 
         * {
