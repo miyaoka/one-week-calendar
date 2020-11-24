@@ -1,15 +1,25 @@
 import Head from 'next/head'
 import { useCalendar } from '../lib/useCalendar'
 import { useState, useMemo } from 'react'
+import { useDarkmode } from '../lib/useDarkmode'
 
 export default function Home() {
   const { currentTime, dateList } = useCalendar()
   const [fontFamily, setFontFamily] = useState('Roboto Slab')
+  const { darkmode, setDarkmode } = useDarkmode(true)
   const escapedFontFamily = useMemo(() => fontFamily.replace(/\s/g, '+'), [
     fontFamily,
   ])
 
-  function onClick() {
+  function toggleDarkmode() {
+    setDarkmode(!darkmode)
+  }
+
+  function openFontFamilyConfig(
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) {
+    e.stopPropagation()
+
     const font = prompt('Enter Google Font name', fontFamily)
     if (font != null) setFontFamily(font)
   }
@@ -28,7 +38,7 @@ export default function Home() {
       </Head>
 
       <div className="container" style={{ fontFamily: `'${fontFamily}'` }}>
-        <div className="week">
+        <div className="week" onClick={toggleDarkmode}>
           {dateList.map(({ day, mDate, isToday }) => (
             <div className="date" key={mDate}>
               <div className="day">{day}</div>
@@ -46,7 +56,7 @@ export default function Home() {
             })
             .slice(-5)}
         </div>
-        <div className="config" onClick={onClick}></div>
+        <div className="config" onClick={openFontFamilyConfig}></div>
       </div>
 
       <style jsx>{`
@@ -90,7 +100,7 @@ export default function Home() {
         .isToday::before {
           content: '';
           height: 4px;
-          background: #999;
+          background: #333;
           position: absolute;
           bottom: 0;
           left: 0;
@@ -110,7 +120,7 @@ export default function Home() {
           bottom: 0;
           left: 0;
           right: 0;
-          color: #333;
+          color: #eee;
         }
       `}</style>
 
@@ -122,10 +132,19 @@ export default function Home() {
           overflow: hidden;
         }
         body {
+          background: #fff;
+          color: #333;
+        }
+        body.dark {
           background: #000;
           color: #ccc;
         }
-
+        .dark .isToday::before {
+          background: #ccc;
+        }
+        .dark .time {
+          color: #111;
+        }
         * {
           box-sizing: border-box;
         }
