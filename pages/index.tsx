@@ -79,7 +79,6 @@ export default function Home() {
           align-items: center;
         }
         .day {
-          pointer-events: none;
           font-size: 3vw;
           font-weight: 700;
           position: absolute;
@@ -89,8 +88,7 @@ export default function Home() {
           transform: translateY(-100%);
         }
         .mDate > span {
-          pointer-events: none;
-          font-size: 11vw;
+          font-size: 10vw;
           font-weight: 700;
           padding: 10px 0;
         }
@@ -115,7 +113,6 @@ export default function Home() {
           height: 60px;
         }
         .time {
-          pointer-events: none;
           position: fixed;
           bottom: 0;
           left: 0;
@@ -134,6 +131,7 @@ export default function Home() {
         body {
           background: #fff;
           color: #333;
+          user-select: none;
         }
         body.dark {
           background: #000;
