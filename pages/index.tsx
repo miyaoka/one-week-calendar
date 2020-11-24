@@ -69,7 +69,7 @@ export default function Home() {
           align-items: center;
         }
         .day {
-          font-size: 20px;
+          font-size: 3vw;
           font-weight: 700;
           position: absolute;
           top: 0;
@@ -78,7 +78,7 @@ export default function Home() {
           transform: translateY(-100%);
         }
         .mDate > span {
-          font-size: 50px;
+          font-size: 11vw;
           font-weight: 700;
           padding: 10px 0;
         }
