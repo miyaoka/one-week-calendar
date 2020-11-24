@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 
 const oneDay = 86400 * 1000
-const timerInterval = 1 * 1000
+const timerInterval = 10 * 1000
 const dayLabel = 'SMTWTFS'.split('')
 
 export function useCalendar() {
