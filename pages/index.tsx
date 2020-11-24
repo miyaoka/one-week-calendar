@@ -3,7 +3,7 @@ import { useCalendar } from '../lib/useCalendar'
 import { useState, useMemo } from 'react'
 
 export default function Home() {
-  const dateList = useCalendar()
+  const { currentTime, dateList } = useCalendar()
   const [fontFamily, setFontFamily] = useState('Roboto Slab')
   const escapedFontFamily = useMemo(() => fontFamily.replace(/\s/g, '+'), [
     fontFamily,
@@ -37,6 +37,17 @@ export default function Home() {
               </div>
             </div>
           ))}
+        </div>
+        <div className="time">
+          {new Date(currentTime).toLocaleDateString('en', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            timeZone: 'Asia/Tokyo',
+          })}
         </div>
         <div className="config" onClick={onClick}></div>
       </div>
@@ -93,6 +104,13 @@ export default function Home() {
           right: 0;
           width: 60px;
           height: 60px;
+        }
+        .time {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          color: #333;
         }
       `}</style>
 

@@ -1,14 +1,17 @@
 import { useEffect, useMemo, useState } from 'react'
 
 const oneDay = 86400 * 1000
-const oneMinute = 60 * 1000
+const timerInterval = 1 * 1000
 const dayLabel = 'SMTWTFS'.split('')
 
 export function useCalendar() {
-  const [currentTime, setCurrentTime] = useState(Date.now() + oneDay * 0)
+  const [currentTime, setCurrentTime] = useState(Date.now())
 
   useEffect(() => {
-    const timerHandle = setTimeout(() => setCurrentTime(Date.now()), oneMinute)
+    const timerHandle = setTimeout(
+      () => setCurrentTime(Date.now()),
+      timerInterval
+    )
     return () => {
       clearTimeout(timerHandle)
     }
@@ -27,5 +30,5 @@ export function useCalendar() {
     })
   }, [currentTime])
 
-  return dateList
+  return { currentTime, dateList }
 }
