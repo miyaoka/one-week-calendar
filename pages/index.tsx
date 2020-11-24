@@ -24,6 +24,9 @@ export default function Home() {
     if (font != null) setFontFamily(font)
   }
 
+  const now = new Date(currentTime)
+  const dayVal = (now.getHours() + now.getMinutes() / 60) / 24
+
   return (
     <>
       <Head>
@@ -43,13 +46,23 @@ export default function Home() {
             <div className="date" key={mDate}>
               <div className="day">{day}</div>
               <div className="mDate">
-                <span className={isToday ? 'isToday' : ''}>{mDate}</span>
+                <span>{mDate}</span>
+                {isToday ? (
+                  <div className="today">
+                    <div
+                      className="hour"
+                      style={{ left: `${dayVal * 100}%` }}
+                    ></div>
+                  </div>
+                ) : (
+                  ''
+                )}
               </div>
             </div>
           ))}
         </div>
         <div className="time">
-          {new Date(currentTime)
+          {now
             .toLocaleDateString('ja', {
               hour: '2-digit',
               minute: '2-digit',
@@ -92,18 +105,22 @@ export default function Home() {
           font-weight: 700;
           padding: 10px 0;
         }
-        .isToday {
-          position: relative;
-        }
-        .isToday::before {
-          content: '';
-          height: 4px;
+        .today {
+          height: 0.5vw;
           background: #333;
           position: absolute;
           bottom: 0;
           left: 0;
           right: 0;
           transform: translateY(100%);
+        }
+        .hour {
+          position: absolute;
+          height: 2vw;
+          width: 1vw;
+          background: #333;
+          top: 50%;
+          transform: translate(-50%, -50%);
         }
         .config {
           position: fixed;
@@ -137,11 +154,12 @@ export default function Home() {
           background: #000;
           color: #ccc;
         }
-        .dark .isToday::before {
-          background: #ccc;
+        .dark .today,
+        .dark .hour {
+          background: #ccc !important;
         }
         .dark .time {
-          color: #111;
+          color: #111 !important;
         }
         * {
           box-sizing: border-box;
