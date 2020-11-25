@@ -5,7 +5,7 @@ import { useDarkmode } from '../lib/useDarkmode'
 
 export default function Home() {
   const { currentTime, dateList } = useCalendar()
-  const [fontFamily, setFontFamily] = useState('Roboto Slab')
+  const [fontFamily, setFontFamily] = useState('Lora')
   const { darkmode, setDarkmode } = useDarkmode(true)
   const escapedFontFamily = useMemo(() => fontFamily.replace(/\s/g, '+'), [
     fontFamily,
