@@ -7,9 +7,8 @@ export function useDarkmode(
   const [darkmode, setDarkmode] = useState(initialMode)
 
   useEffect(() => {
-    const classList = document.querySelector('body')?.classList
-    if (!classList) return
-
+    const classList = document.documentElement.classList
+    console.log(darkmode)
     if (darkmode) {
       classList.add(darkClassName)
     } else {
