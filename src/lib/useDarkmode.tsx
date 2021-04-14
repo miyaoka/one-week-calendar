@@ -8,7 +8,6 @@ export function useDarkmode(
 
   useEffect(() => {
     const classList = document.documentElement.classList
-    console.log(darkmode)
     if (darkmode) {
       classList.add(darkClassName)
     } else {
@@ -16,5 +15,9 @@ export function useDarkmode(
     }
   }, [darkmode])
 
-  return { darkmode, setDarkmode }
+  const toggleDarkmode = () => {
+    setDarkmode(!darkmode)
+  }
+
+  return { toggleDarkmode }
 }

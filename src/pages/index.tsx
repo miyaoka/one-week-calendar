@@ -6,14 +6,10 @@ import { useDarkmode } from '../lib/useDarkmode'
 export default function Home() {
   const { currentTime, dateList } = useCalendar()
   const [fontFamily, setFontFamily] = useState('Lora')
-  const { darkmode, setDarkmode } = useDarkmode(true)
+  const { toggleDarkmode } = useDarkmode(true)
   const escapedFontFamily = useMemo(() => fontFamily.replace(/\s/g, '+'), [
     fontFamily,
   ])
-
-  function toggleDarkmode() {
-    setDarkmode(!darkmode)
-  }
 
   function openFontFamilyConfig(
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -39,8 +35,9 @@ export default function Home() {
       <div
         className="flex h-screen items-center"
         style={{ fontFamily: `'${fontFamily}'` }}
+        onClick={toggleDarkmode}
       >
-        <div className="flex w-full" onClick={toggleDarkmode}>
+        <div className="flex w-full">
           {dateList.map(({ day, mDate, isToday }) => (
             <div className="flex-1 relative" key={mDate}>
               <div className="flex justify-center items-center absolute top-0 left-0 right-0 transform -translate-y-full font-bold text-[3vw] ">
